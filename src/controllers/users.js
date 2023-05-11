@@ -7,12 +7,8 @@ User.post = async (req, res, next) => {
     message: 'User created successfully'
   }
   try {
-    const result = await createUser (req.body)
-    response.details = {
-      id: result.uuid,
-      email: result.email,
-      nickName: result.nickName
-    }
+    const { id, email, nickName } = await createUser (req.body)
+    response.details = { id, email, nickName }
   } catch (error) {
     if ( error.name === 'SequelizeUniqueConstraintError'){
       response.status = 400

@@ -2,10 +2,11 @@ import { Sequelize } from 'sequelize'
 
 const Users = (sequelize) => {
   const user = sequelize.define('Users', {
-    uuid: {
-      type: Sequelize.DataTypes.UUID,
+    id: {
       primaryKey: true,
-      defaultValue: Sequelize.DataTypes.UUIDV4
+      type: Sequelize.DataTypes.UUID,
+      defaultValue: Sequelize.DataTypes.UUIDV4,
+      allowNull: false
     },
     nickName: {
       type: Sequelize.DataTypes.STRING,
@@ -16,7 +17,7 @@ const Users = (sequelize) => {
       unique: true,
       allowNull: false
     },
-    hashPassword:{
+    hashedPassword:{
       type: Sequelize.DataTypes.STRING(60),
       allowNull: false
     },

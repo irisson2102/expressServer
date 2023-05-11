@@ -5,8 +5,8 @@ import { SALTROUNDS } from '../../appConfig/constants.js'
 
 const userIterator = async(user) => {
   const newUser = { ...user }
-  const hashPassword = await bcrypt.hash(user.password, SALTROUNDS)
-  newUser.hashPassword = hashPassword
+  const hashedPassword = await bcrypt.hash(user.password, SALTROUNDS)
+  newUser.hashedPassword = hashedPassword
   delete newUser.password
   return newUser
 }
