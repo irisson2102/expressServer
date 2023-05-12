@@ -12,6 +12,23 @@ export const createUser = async (user) => {
   }
 }
 
+export const userExist = async ({ email }) => {
+  const resp = { newUser: true }
+  const match = await dbcontext.Users.findAll({
+    where: {
+      email,
+      deleted: false,
+    },
+    attributes: ['isActive']
+  })
+  console.log('match: ', match)
+  if(match.length > 0) {
+    resp.newUser = false
+    resp.isActive = match[0].dataValues.isActive
+  }
+  return resp
+}
+
 const createHashPW = async (password) => {
   return bcrypt.hash(password, SALTROUNDS)
 }

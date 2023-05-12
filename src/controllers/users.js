@@ -1,4 +1,5 @@
-import { createUser } from './utils/userUtils.js'
+import { createUser, userExist } from './utils/userUtils.js'
+
 const User = {}
 
 User.post = async (req, res, next) => {
@@ -7,17 +8,19 @@ User.post = async (req, res, next) => {
     message: 'User created successfully'
   }
   try {
-    const { id, email, nickName } = await createUser (req.body)
-    response.details = { id, email, nickName }
-  } catch (error) {
-    if ( error.name === 'SequelizeUniqueConstraintError'){
+    const { newUser, isActive } = await userExist(req.body)
+    if ( !newUser ) {
       response.status = 400
-      response.message = 'User already exist'   
+      response.message = 'User already exist'
+      response.details = { isActive }
     } else {
-      response.status = 500
-      response.message = 'Internal Server Error'
-      console.log(error)
+      const { id, email, nickName } = await createUser (req.body)
+      response.details = { id, email, nickName }
     }
+  } catch (error) {
+    response.status = 500
+    response.message = 'Internal Server Error'
+    console.log(error)
   }
   res.locals.response = response
   next()

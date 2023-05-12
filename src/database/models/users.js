@@ -14,7 +14,6 @@ const Users = (sequelize) => {
     },
     email: {
       type: Sequelize.DataTypes.STRING,
-      unique: true,
       allowNull: false
     },
     hashedPassword:{
@@ -28,6 +27,11 @@ const Users = (sequelize) => {
     isVerified: {
       type: Sequelize.DataTypes.BOOLEAN,
       defaultValue: false,
+      allowNull: false
+    },
+    isActive: {
+      type: Sequelize.DataTypes.BOOLEAN,
+      defaultValue: true,
       allowNull: false
     },
     deleted: {
