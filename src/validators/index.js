@@ -1,7 +1,8 @@
-import { postUserSchema } from "./schemas/users.js";
+import { postUserSchema, patchUserSchema } from "./schemas/users.js";
 
 const validators = {
-  postUserSchema
+  postUserSchema,
+  patchUserSchema
 }
 
 const Validator = (schema) => {

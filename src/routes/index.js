@@ -6,7 +6,7 @@ import Validator from '../validators/index.js'
 // Include all your route files here
 const registerRoutes = (app) => {
   app.use('/helloWorld', helloWorldRouter)
-  app.use('/user', Validator('postUserSchema'), userRouter, respHandler)
+  app.use('/user', userRouter, respHandler)
 }
 
 export default registerRoutes
